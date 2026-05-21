@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25th Wedding Anniversary Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Marcellus&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --royal-red: #721c24;
+            --gold: #d4af37;
+            --bright-gold: #f3e5ab;
+            --dark-gold: #aa7c11;
+            --beige-light: #f9f6f0;
+            --beige-dark: #f1ebd9;
+            --text-color: #3a352a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Marcellus', serif;
+            background-color: #e5ddca;
+            color: var(--text-color);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* --- RED ENVELOPE COVER SCREEN --- */
+        #envelope-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s;
+        }
+
+        .envelope-half {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background: radial-gradient(circle, #a30000 30%, #660000 100%);
+            border: 5px solid var(--gold);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.7);
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .envelope-top {
+            top: 0;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .envelope-bottom {
+            bottom: 0;
+            border-top: 2px solid var(--gold);
+        }
+
+        /* Ganesh Idol Center Badge */
+        .ganesh-seal {
+            position: absolute;
+            z-index: 1001;
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(135deg, #ffe066, var(--gold), var(--dark-gold));
+            border-radius: 50%;
+            border: 4px double #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.8), 0 5px 15px rgba(0,0,0,0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: pulse-seal 2.5s infinite;
+        }
+
+        .ganesh-seal:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .ganesh-top-logo {
+            margin: -6px auto 4px;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ganesh-top-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+
+        .ganesh-seal svg {
+            width: 85px;
+            height: 85px;
+            fill: #700000;
+            filter: drop-shadow(1px 1px 1px rgba(255,255,255,0.4));
+        }
+
+        .click-text {
+            position: absolute;
+            bottom: -35px;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
+        }
+
+        /* Envelope Reveal States */
+        .opened .envelope-top { transform: translateY(-100%); }
+        .opened .envelope-bottom { transform: translateY(100%); }
+        .opened .ganesh-seal { transform: scale(0); opacity: 0; pointer-events: none; }
+        
+        .opened#envelope-container {
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 1.2s ease 1.2s;
+        }
+
+        /* --- LUXURY BEIGE MAIN CARD --- */
+        #main-card {
+            max-width: 650px;
+            margin: 0 auto;
+            background: linear-gradient(rgba(249, 246, 240, 0.94), rgba(241, 235, 217, 0.96)), 
+                        url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            border: 12px double var(--dark-gold);
+            outline: 4px solid var(--gold);
+            outline-offset: -20px;
+            padding: 50px 35px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Golden Filigree Embroidery Corners */
+        #main-card::before, #main-card::after {
+            content: "✦ ⚜ ✦";
+            position: absolute;
+            color: var(--dark-gold);
+            font-size: 20px;
+            width: 100%;
+            left: 0;
+            letter-spacing: 20px;
+            opacity: 0.7;
+        }
+        #main-card::before { top: 25px; }
+        #main-card::after { bottom: 25px; }
+
+        .marigold-leela {
+            font-size: 20px;
+            color: var(--dark-gold);
+            margin: 15px 0;
+            letter-spacing: 6px;
+            opacity: 0.8;
+        }
+
+        h1, h2 {
+            font-family: 'Cinzel Decorative', serif;
+            color: #5a1118; /* Rich Marone for contrasting text accent */
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem;
+            color: var(--dark-gold);
+            margin: 10px 0;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+        }
+
+        /* --- PREVIOUS PHOTOS & JOURNEY --- */
+        .timeline-box {
+            background: #ffffff;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 4px;
+            padding: 24px;
+            margin: 35px 0;
+            box-shadow: 0 6px 18px rgba(58,53,42,0.06);
+            position: relative;
+        }
+
+        /* Golden inner embroidery-line on photo boxes */
+        .timeline-box::after {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px dashed var(--gold);
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        .photo-frame {
+            width: 100%;
+            max-width: 340px;
+            margin: 0 auto 18px;
+            border: 6px solid #fff;
+            outline: 2px solid var(--gold);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+.photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Photo rotations (clockwise) */
+.rotate-90-cw,
+        .rotate-270-cw {
+            transform-origin: center;
+            display: block;
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+        .rotate-90-cw {
+            transform: rotate(90deg);
+        }
+        .rotate-270-cw {
+            transform: rotate(270deg);
+        }
+
+        .journey-text {
+            font-family: 'Poppins', sans-serif;
+            font-style: italic;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
+        /* --- ACTUAL INVITATION BODY --- */
+        .invitation-details {
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+            padding: 40px 10px;
+            margin: 45px 0;
+            position: relative;
+        }
+
+        .invitation-details::before {
+            content: "❖";
+            position: absolute;
+            top: -13px; left: 48%;
+            background: var(--beige-light);
+            padding: 0 10px;
+            color: var(--dark-gold);
+        }
+
+        .couple-names {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2rem;
+            color: #610c13;
+            margin: 20px 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .and-sign {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--dark-gold);
+            display: block;
+            margin: -8px 0;
+        }
+
+        .venue-text {
+            font-size: 1.25rem;
+            margin-top: 20px;
+        }
+        
+        .highlight-venue {
+            color: #610c13;
+            font-weight: bold;
+            border-bottom: 1px double var(--dark-gold);
+        }
+
+        /* --- ATTRACTIVE EMBELLISHED CALENDAR --- */
+        .calendar-wrapper {
+            margin: 40px auto;
+            max-width: 320px;
+            background: linear-gradient(145deg, #ffffff, var(--beige-light));
+            border-radius: 16px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 12px 30px rgba(170, 124, 17, 0.15);
+            padding: 15px;
+            position: relative;
+        }
+
+        /* Mini corner loops to look like traditional hangings */
+        .calendar-wrapper::before {
+            content: "◦ ◦ ◦";
+            position: absolute;
+            top: -18px; left: 38%;
+            font-size: 22px;
+            color: var(--dark-gold);
+            letter-spacing: 5px;
+        }
+
+        .calendar-header-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.2rem;
+            color: #610c13;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--beige-dark);
+            padding-bottom: 8px;
+        }
+
+        .calendar-grid-premium {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .day-name {
+            color: var(--dark-gold);
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .day-num {
+            padding: 8px 0;
+            color: var(--text-color);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        /* Stunning Royal Date Accent */
+        .silver-jubilee-day {
+            background: linear-gradient(135deg, #610c13, #911822);
+            color: #ffffff !important;
+            font-weight: 700;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 0 3px var(--beige-light), 0 0 0 5px var(--gold);
+            transform: scale(1.1);
+            animation: rhythmic-glow 2s infinite;
+        }
+
+        /* --- FOOTER & CLOSURE --- */
+        .closure-section {
+            margin-top: 50px;
+            padding-top: 25px;
+        }
+
+        .thankyou-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--dark-gold);
+        }
+
+        .close-btn {
+            margin-top: 25px;
+            background: #610c13;
+            color: #fff;
+            border: 2px solid var(--gold);
+            padding: 12px 35px;
+            font-family: 'Marcellus', serif;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            background: var(--beige-light);
+            color: #610c13;
+            border-color: #610c13;
+        }
+
+        /* --- ANIMATION ENGINE --- */
+        @keyframes pulse-seal {
+            0% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.7); }
+            50% { box-shadow: 0 0 35px rgba(255, 255, 255, 0.9), 0 0 15px var(--gold); }
+            100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.7); }
+        }
+
+        @keyframes rhythmic-glow {
+            0% { box-shadow: 0 0 0 3px var(--beige-light), 0 0 0 5px var(--gold); }
+            50% { box-shadow: 0 0 0 3px var(--beige-light), 0 0 0 9px #911822, 0 0 15px var(--gold); }
+            100% { box-shadow: 0 0 0 3px var(--beige-light), 0 0 0 5px var(--gold); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-container">
+        <div class="envelope-half envelope-top"></div>
+        
+        <div class="ganesh-seal" onclick="openInvitation()">
+            <svg viewBox="0 0 100 100">
+                <path d="M50,15 C45,15 40,18 40,25 C40,30 45,32 45,38 C45,45 35,48 35,55 C35,65 45,72 50,72 C55,72 65,65 65,55 C65,48 55,45 55,38 C55,32 60,30 60,25 C60,18 55,15 50,15 Z M50,22 C52,22 53,23 53,25 C53,27 52,28 50,28 C48,28 47,27 47,25 C47,23 48,22 50,22 Z M50,42 C53,45 58,46 58,52 C58,58 53,62 50,62 C47,62 42,58 42,52 C42,46 47,45 50,42 Z"/>
+                <path d="M42,32 Q50,37 58,32" stroke-width="2" stroke="#700000" fill="none"/>
+                <path d="M38,45 Q25,48 30,58 Q35,65 40,60" stroke-width="2" stroke="#700000" fill="none"/>
+                <path d="M62,45 Q75,48 70,58 Q65,65 60,60" stroke-width="2" stroke="#700000" fill="none"/>
+            </svg>
+            <div class="click-text">TAP TO OPEN</div>
+        </div>
+
+        <div class="envelope-half envelope-bottom"></div>
+    </div>
+
+
+    <div id="main-card">
+        
+        <div class="ganesh-top-logo" aria-hidden="true">
+            <img
+                src="https://png.pngtree.com/png-clipart/20221226/original/pngtree-lord-ganesh-outline-logo-illustration-with-om-symbol-png-image_8810227.png"
+                alt="Ganesh"
+            />
+        </div>
+
+        <div class="marigold-leela">⚜ ✦ ⚜ ✦ ⚜</div>
+        <div style="height: 6px;"></div>
+
+        
+        <h2 style="margin-top: 20px; font-size: 1.3rem; letter-spacing: 2px;">CELEBRATING THE</h2>
+        <div class="subtitle">Silver Jubilee</div>
+
+        <div class="journey-section">
+            
+            <div class="timeline-box">
+                <div class="photo-frame">
+<img src="WhatsApp Image 2026-05-20 at 02.04.30.jpeg" alt="Wedding Day 2001" class="rotate-90-cw" >
+                </div>
+                <p class="journey-text">"Where it all began... Two hearts bound by sacred vows, embarking on an uncharted journey filled with dreams, love, and matching promises."</p>
+            </div>
+
+            <div class="marigold-leela" style="font-size: 14px;">✧ ⚜ ✧</div>
+
+            <div class="timeline-box">
+                <div class="photo-frame">
+<img src="WhatsApp Image 2026-05-20 at 02.04.30 (2).jpeg" alt="Present Day" class="rotate-270-cw">
+                </div>
+                <p class="journey-text">"25 years later, through every laughter shared and challenge weathered, our bond has only grown stronger, deeper, and infinitely more beautiful."</p>
+            </div>
+
+        </div>
+
+        <div class="invitation-details">
+            <p style="font-size: 1.1rem; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif; color: #555;">
+                We cordially invite you to grace the 25th Wedding Anniversary celebration of
+            </p>
+            
+            <div class="couple-names">
+                Mr. Dinesh Indalkar
+                <span class="and-sign">&</span>
+                Mrs. Nilima Indalkar
+            </div>
+
+            <p style="font-family: 'Poppins', sans-serif; color: #555; font-size: 0.95rem;">
+                Join us to bless the couple as they toast to a lifetime of unified love.
+            </p>
+            
+            <div class="venue-text">
+                <span style="display:block; margin-bottom:5px; text-transform: uppercase; font-size:0.8rem; letter-spacing:2px; color:var(--dark-gold); font-weight:bold;">Celebration Venue:</span>
+                <span class="highlight-venue">Mayfield Estate </span>, Kharadi, Pune.
+            </div>
+        </div>
+
+        <div class="calendar-wrapper">
+            <div class="calendar-header-title">May 2026</div>
+            <div class="calendar-grid-premium">
+                <div class="day-name">Sun</div><div class="day-name">Mon</div><div class="day-name">Tue</div><div class="day-name">Wed</div><div class="day-name">Thu</div><div class="day-name">Fri</div><div class="day-name">Sat</div>
+                
+                <div class="day-num"></div><div class="day-num"></div><div class="day-num"></div><div class="day-num"></div><div class="day-num"></div>
+                
+                <div class="day-num">1</div><div class="day-num">2</div>
+                <div class="day-num">3</div><div class="day-num">4</div><div class="day-num">5</div><div class="day-num">6</div><div class="day-num">7</div><div class="day-num">8</div><div class="day-num">9</div>
+                <div class="day-num">10</div><div class="day-num">11</div><div class="day-num">12</div><div class="day-num">13</div><div class="day-num">14</div><div class="day-num">15</div><div class="day-num">16</div>
+                <div class="day-num">17</div><div class="day-num">18</div><div class="day-num">19</div><div class="day-num">20</div><div class="day-num">21</div><div class="day-num">22</div><div class="day-num">23</div>
+                <div class="day-num">24</div><div class="day-num">25</div><div class="day-num">26</div>
+                
+                <div class="day-num silver-jubilee-day" title="25th Anniversary Day!">27</div>
+                
+                <div class="day-num">28</div><div class="day-num">29</div><div class="day-num">30</div>
+                <div class="day-num">31</div>
+            </div>
+        </div>
+
+        <div class="closure-section">
+            <div class="thankyou-text">Thank You</div>
+            <p style="font-size: 0.95rem; color: var(--dark-gold); letter-spacing: 2px; font-weight: bold; margin-top: 5px;">— The Indalkar Family —</p>
+            <button class="close-btn" onclick="closeInvitation()">CLOSE CARD</button>
+        </div>
+
+    </div>
+
+    <script>
+        function openInvitation() {
+            const envelope = document.getElementById('envelope-container');
+            envelope.classList.add('opened');
+            document.body.style.overflowY = "auto";
+        }
+
+        function closeInvitation() {
+            const envelope = document.getElementById('envelope-container');
+            envelope.classList.remove('opened');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            setTimeout(() => {
+                document.body.style.overflowY = "hidden";
+            }, 900);
+        }
+
+        window.onload = function() {
+            window.scrollTo(0,0);
+            document.body.style.overflowY = "hidden";
+        }
+    </script>
+</body>
+</html>
